@@ -1,0 +1,56 @@
+{% extends 'layouts/layout.html' %}
+
+{% block content  %}
+
+
+
+
+
+<h1>Ingreso Visitante</h1>
+
+
+
+
+ <form action="{% url 'save' %}" method="POST"> 
+    {% csrf_token %} 
+  
+    <div class="mb-3">
+        <label for="fecha_inicio" class="form-label">Fecha de ingreso</label>
+        <input type="datetime-local" class="form-control" name="fecha_inicio">
+      </div>
+      <div class="mb-3">
+        <label for="fecha_fin" class="form-label">Fecha de salida</label>
+        <input type="datetime-local" class="form-control" name="fecha_fin">
+      </div>
+     
+      <div class="mb-3">
+        <label for="objetos" class="form-label">Objetos</label>
+        <textarea class="form-control" id="objetos" rows="3"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="autorizacion" class="form-label">Autorizacion</label>
+        <input type="text" class="form-control" name="autorizacion">
+      </div>
+
+      <div class="mb-3">
+        <label for="observaciones">Observaciones</label>
+        <textarea class="form-control" id="observaciones" rows="3"></textarea>
+      </div>
+      
+
+     
+    <button type="sumbit" class="btn btn-primary">Guardar</button>
+  </form>
+
+
+{% endblock  %}
+<!-- <div class="mb-3">
+  <label for="destino">Destino</label>
+  <select class="form-control" id="destino">
+    <option>Bloque 1</option>
+    <option>Bloque 2</option>
+    <option>Bloque 3</option>
+    <option>Bloque 4</option>
+    <option>Bloque 5</option>
+  </select>
+</div> -->

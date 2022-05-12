@@ -1,0 +1,63 @@
+{% extends 'layouts/layout.html' %}
+
+{% block content  %}
+
+
+
+<h1>Reporte de niveles de seguridad</h1>
+
+ <a name="" id="" class="btn btn-success" href="{% url 'crear_nivel_seguridad' %}" role="button">Agregar Nivel de seguridad</a><br>    
+    
+     <!-- <ul>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+     </ul> -->
+
+     
+      <br> 
+     <table id="tabla" class="table" >
+    
+        <thead>
+         
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">TIPO DE ACCESO</th>
+            <th scope="col">DESCRIPCION</th>
+            <th scope="col">ACCIONES</th>
+          
+          </tr>
+        </thead>
+        <tbody>
+            {% for nivel in niveles_seguridad %}
+            <tr>
+                <th scope="row">{{nivel.id}}</th>
+                <td>
+                    {{nivel.tipo_acceso}}</td>
+                <td>{{nivel.descripcion}}</td>
+                <td>
+                  <a name="" id="" class="btn btn-info" href="" role="button">editar</a>
+
+                  <a name="" id="" class="btn btn-danger" href="" role="button">Borrar</a>
+                  
+                </td> 
+
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      <h2></h2>
+
+      {%block extrajs%}
+      <script type="text/javascript">
+        $(document).ready( function () {
+          $('#tabla').DataTable();
+      } );
+    </script>
+
+      {%endblock extrajs%}
+
+
+{% endblock  %}

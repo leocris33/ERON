@@ -1,0 +1,26 @@
+
+
+{% extends 'layouts/layout.html' %}
+
+
+{% block content  %}
+
+
+<h2> {{'Crear nivel de seguridad'|upper}} </h2>
+
+<form action="{% url 'saveNS' %}" method="POST">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="tipo_acceso" class="form-label">Tipo de acceso</label>
+    <input type="text" class="form-control" name="tipo_acceso">
+  </div>
+  <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripcion</label>
+      <input type="text" class="form-control" name="descripcion">
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </form
+
+
+{% endblock  %}
