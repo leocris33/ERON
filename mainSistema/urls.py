@@ -31,6 +31,6 @@ urlpatterns = [
     path('editar/', views.editar, name='editar'),
     path('visualizarVisitante',views.visualizarVisitante , name='visualizarVisitante'),
     path('inf_visitante', views.inf_visitante, name="inf_visitante"),
-    path('save_ingreso/<documento>/<id_disp>', views.ingreso, name='save_ingreso'),
+    path('save_ingreso/<str:documento>/<str:id_disp>', views.ingreso, name='save_ingreso'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -18,6 +18,12 @@ class Visitante(models.Model):
     fechaNacimiento = models.DateField(verbose_name="Fecha de Nacimiento")
     imagen = models.ImageField(upload_to='imagenes/', verbose_name="Imagen", null=True,)
     
+    class Meta:
+        verbose_name = "Visitante"
+        verbose_name_plural = "Visitantes"
+
+    def __str__(self) -> str:
+        return f"{self.nombre} - {self.documento}"
 
 
 class Niveles_seguridad(models.Model):
@@ -34,6 +40,13 @@ class Dispositivos(models.Model):
     identificador = models.CharField(max_length=100, verbose_name="Identificador")
     ubicacion = models.CharField(max_length=100, verbose_name="Ubicacion")
 
+    class Meta:
+        verbose_name = "Dispositivo"
+        verbose_name_plural = "Dispositivos"
+
+    def __str__(self) -> str:
+        return f"{self.nombre} - {self.ubicacion}"
+
 class Alerta(models.Model):
     id = models.AutoField(primary_key=True)
     idDispositivos = models.ForeignKey(Dispositivos, on_delete=models.CASCADE, null=True)
@@ -47,12 +60,26 @@ class Permiso(models.Model):
     objetos = models.CharField(max_length=100, verbose_name="Objetos")
     autorizacion = models.BooleanField(default=False)
     idVisitante_permi = models.ForeignKey(Visitante, on_delete=models.CASCADE, related_name="visitante_permiso", null=True)
-    idNiveles_seguridad = models.ForeignKey(Niveles_seguridad, on_delete=models.CASCADE, null=True) 
+    idNiveles_seguridad = models.ForeignKey(Niveles_seguridad, on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        verbose_name = "Permiso"
+        verbose_name_plural = "Permisos"
+
+    def __str__(self) -> str:
+        return f"{self.idVisitante_permi} - {self.autorizacion}"
 
 class Punto_control(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100, verbose_name="Nombre", null=True)
     descripcion = models.CharField(max_length=200, verbose_name="Descripcion", null=True)
+
+    class Meta:
+        verbose_name = "Punto de Control"
+        verbose_name_plural = "Puntos de Control"
+
+    def __str__(self) -> str:
+        return f"{self.nombre}"
 
 
 class Ingreso(models.Model):
@@ -68,5 +95,8 @@ class Punto_control_permiso(models.Model):
 
 class Punto_control_Dispositivos(models.Model):
     idPunto_control_dispo = models.ForeignKey(Punto_control, on_delete=models.CASCADE)
-    idDispositivos = models.ForeignKey(Dispositivos, on_delete=models.CASCADE)
+    idDispositivos = models.ForeignKey(Dispositivos, on_delete=models.CASCADE)   
+
+    def __str__(self) -> str:
+        return f"{self.idPunto_control_dispo} --> {self.idDispositivos}"
 

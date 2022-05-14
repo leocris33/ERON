@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from ast import Num, Return
 from django.http import HttpResponse, JsonResponse
 from .forms import visitanteForm
-from mainSistema.models import Dispositivos, Niveles_seguridad, Permiso, Visitante, Ingreso
+from mainSistema.models import Dispositivos, Niveles_seguridad, Permiso, Visitante, Ingreso, Punto_control_Dispositivos
 from urllib import response
 # Create your views here.
 
@@ -71,21 +71,17 @@ def administrar_niveles(request):
 # Funcion para guardar lo ingresos a puntos de control
 def ingreso(request, documento, id_disp):
 
-    
+    id_permiso = Permiso.objects.filter(idVisitante_permi__documento = documento).values('id')
+    id_pto_ctrl = Punto_control_Dispositivos.objects.filter(idDispositivos = id_disp).values('idPunto_control_dispo')
 
-    id_permiso = get_id_permiso(documento)
+    #id_permiso = get_id_permiso(documento)
    
 
     return JsonResponse({
-        'id_permiso'    : id_permiso,
-        'id_disp'       : id_disp
+        'id_permiso'    : list(id_permiso),
+        'id_disp'       : list(id_pto_ctrl)
     }, status=200)
 
-def get_id_permiso(documento):    
-
-    id_permiso = Permiso.objects.filter(idVisitante_permi_id__documento = documento).values(id)
-
-    return list(id_permiso)
 
 def listado_ingresos(request):
     tittle = 'Listado ingresos'
