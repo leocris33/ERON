@@ -35,12 +35,33 @@ def puntos_de_control(request):
 def permiso(request):
     return render(request,"layouts/permiso.html")
 
+
+
+
+
+
+
 def reporte_permiso(request):
-    datosPermiso = Permiso.objects.all()
-    return render(request,"layouts/reporte_permiso.html",{
-        'mostrarPermiso' : datosPermiso
+    datosPermiso = Permiso.objects.all().values('id','idVisitante_permi__documento', 'fecha_inicio', 'fecha_fin', 'objetos', 'autorizacion' )
+    visi = Visitante.objects.all()
+
+
     
+    return render(request,"layouts/reporte_permiso.html",{ 
+        'documentoVisi'  : visi,    
+        'mostrarPermiso' : datosPermiso
      })
+
+    # return JsonResponse({
+    #     'dato' : list(datosPermiso)
+    # }, status=200)
+
+
+
+
+
+
+
   
     
 def reporte_visitante(request):

@@ -12,8 +12,13 @@
 
 
  <form action="{% url 'saveP' %}" method="POST"> 
-    {% csrf_token %} 
-  
+
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label for="idVisitante_permi__nombre" class="form-label">Nombre del visitante</label>
+        <input type="text" class="form-control" name="idVisitante_permi__nombre">
+      </div>
     <div class="mb-3">
         <label for="fecha_inicio" class="form-label">Fecha de ingreso</label>
         <input type="datetime-local" class="form-control" name="fecha_inicio">
