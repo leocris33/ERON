@@ -38,8 +38,8 @@
             <tr>
                 <th scope="row">{{visit.id}}</th>
                 <td>{{visit.nombre}}</td>
-                <td> {{visit.apellido}}</td>
-                <td> {{visit.documento}}</td>
+                <td>{{visit.apellido}}</td>
+                <td>{{visit.documento}}</td>
                 <td>
                   {%if visit.permiso == 0%}
                     No autoriza
@@ -49,7 +49,10 @@
                     Autoriza
                   {% endif%}
                   </td>
-                  <td> {{visit.imagen}}</td>
+                  <td>
+                    <img src="{{visit.imagen}}"  height="100">
+                    
+                  </td>
                 <td>
                   <a name="" id="" class="btn btn-info" href="editar.html" role="button">editar</a>
 

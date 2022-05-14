@@ -15,7 +15,13 @@ def visitante(request):
 
 
 def visualizarVisitante(request):
-    return render(request,"layouts/visualizarVisi.html")
+    datovisit = Visitante.objects.all()
+    return render(request,"layouts/visualizarVisi.html",{
+    'mostrarvist' : datovisit
+})
+
+def inf_visitante(request):
+    return render(request,"layouts/inf_visitante.html")
 
 def ingreso(request):
     return render(request,'layouts/ingreso.html')
@@ -183,7 +189,7 @@ def save_dispositivos(request):
         dispo = Dispositivos(
 
             nombre = nombre,
-            direcion_ip = "",
+            direcion_ip = direccion_ip,
             direcion_mac = direccion_mac,
             identificador = identificador,
             ubicacion = ubicacion,
@@ -218,6 +224,17 @@ def pruebas_orm(request):
 
 
     }, status=200)
+
+
+def get_Visitante (request):
+    try:
+        Visitante = Visitante.objects.all(documeto="1")
+        response = f"el visitante solicitado es : {Visitante.nombre }{Visitante.apellido}{Visitante.documento}{Visitante.permiso}{Visitante.cargo}{Visitante.organizacion}{Visitante.fechaNacimiento}{Visitante.imagen}"
+    except:
+        response = "el visitante no existe"
+
+    return HttpResponse (Visitante)
+
 
 def editar(request,id):
     visitante = Visitante.objects.get(id=id)
