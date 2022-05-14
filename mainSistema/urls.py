@@ -29,6 +29,7 @@ urlpatterns = [
     path('saveP/', views.save_permiso, name="saveP"),
     path('saveD/', views.save_dispositivos, name="saveD"),
     path('editar/', views.editar, name='editar'),
+    path('visualizarVisitante',views.visualizarVisitante , name='visualizarVisitante'),
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

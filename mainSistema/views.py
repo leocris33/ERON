@@ -14,6 +14,9 @@ def visitante(request):
     return render(request,"layouts/visitante.html")
 
 
+def visualizarVisitante(request):
+    return render(request,"layouts/visualizarVisi.html")
+
 def ingreso(request):
     return render(request,'layouts/ingreso.html')
 
@@ -180,8 +183,8 @@ def save_dispositivos(request):
         dispo = Dispositivos(
 
             nombre = nombre,
-            direccion_ip = direccion_ip,
-            direccion_mac = direccion_mac,
+            direcion_ip = "",
+            direcion_mac = direccion_mac,
             identificador = identificador,
             ubicacion = ubicacion,
            
