@@ -12,7 +12,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.inicio, name='inicio'),
     path('visitante/', mainSistema.views.visitante, name='visitante'),
-    path('ingreso/', mainSistema.views.ingreso, name='ingreso'),
+    path('listado_ingresos/', mainSistema.views.listado_ingresos, name='listado_ingresos'),
     path('dispositivos/', mainSistema.views.dispositivos, name='dispositivos'),
     path('puntos_de_control/', mainSistema.views.puntos_de_control, name='puntos_de_control'),
     path('permiso/', views.permiso, name='permiso'),
@@ -30,6 +30,7 @@ urlpatterns = [
     path('saveD/', views.save_dispositivos, name="saveD"),
     path('editar/', views.editar, name='editar'),
     path('visualizarVisitante',views.visualizarVisitante , name='visualizarVisitante'),
-    path('inf_visitante', views.inf_visitante, name="inf_visitante")
+    path('inf_visitante', views.inf_visitante, name="inf_visitante"),
+    path('save_ingreso/<documento>/<id_disp>', views.ingreso, name='save_ingreso'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

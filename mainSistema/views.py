@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from ast import Num, Return
 from django.http import HttpResponse, JsonResponse
 from .forms import visitanteForm
-from mainSistema.models import Dispositivos, Niveles_seguridad, Permiso, Visitante
+from mainSistema.models import Dispositivos, Niveles_seguridad, Permiso, Visitante, Ingreso
 from urllib import response
 # Create your views here.
 
@@ -21,10 +21,10 @@ def visualizarVisitante(request):
 })
 
 def inf_visitante(request):
+
     return render(request,"layouts/inf_visitante.html")
 
-def ingreso(request):
-    return render(request,'layouts/ingreso.html')
+
 
 def dispositivos(request):
     return render(request,"layouts/dispositivos.html")
@@ -64,6 +64,36 @@ def administrar_niveles(request):
         'niveles_seguridad' : datoSeguridad
 
     })
+
+
+
+
+# Funcion para guardar lo ingresos a puntos de control
+def ingreso(request, documento, id_disp):
+
+    
+
+    id_permiso = get_id_permiso(documento)
+   
+
+    return JsonResponse({
+        'id_permiso'    : id_permiso,
+        'id_disp'       : id_disp
+    }, status=200)
+
+def get_id_permiso(documento):    
+
+    id_permiso = Permiso.objects.filter(idVisitante_permi_id__documento = documento).values(id)
+
+    return list(id_permiso)
+
+def listado_ingresos(request):
+    tittle = 'Listado ingresos'
+
+    return render(request, 'layouts/listado_ingresos.html', {
+        'tittle'    : tittle
+    })
+
 
 
 # def pruebas_DB(request,nombre,apellidos,documento,fecha_nac,cargo,organizacion,permiso):
@@ -226,9 +256,9 @@ def pruebas_orm(request):
     }, status=200)
 
 
-def get_Visitante (request):
+def get_Visitante (request, documento):
     try:
-        Visitante = Visitante.objects.all(documeto="1")
+        Visitante = Visitante.objects.filter(documeto=documento)
         response = f"el visitante solicitado es : {Visitante.nombre }{Visitante.apellido}{Visitante.documento}{Visitante.permiso}{Visitante.cargo}{Visitante.organizacion}{Visitante.fechaNacimiento}{Visitante.imagen}"
     except:
         response = "el visitante no existe"
