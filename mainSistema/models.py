@@ -4,6 +4,9 @@ from django.db import models
 
 # Create your models here.
 
+
+
+
 class Visitante(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100, verbose_name="Nombre")
@@ -13,7 +16,7 @@ class Visitante(models.Model):
     cargo = models.CharField(max_length=100, verbose_name="Cargo")
     organizacion = models.CharField(max_length=100, verbose_name="Organizacion")
     fechaNacimiento = models.DateField(verbose_name="Fecha de Nacimiento")
-    imagen = models.ImageField(upload_to='imagenes/', null=True,verbose_name="Imagen")
+    imagen = models.ImageField(upload_to='imagenes/', verbose_name="Imagen", null=True,)
     
 
 
@@ -26,8 +29,8 @@ class Niveles_seguridad(models.Model):
 class Dispositivos(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100, verbose_name="Nombre")
-    dirrecion_ip = models.CharField(max_length=100, verbose_name="Direccion IP")
-    dirrecion_mac = models.CharField(max_length=100, verbose_name="Direccion MAC")
+    direcion_ip = models.CharField(max_length=100, verbose_name="Direccion IP")
+    direcion_mac = models.CharField(max_length=100, verbose_name="Direccion MAC")
     identificador = models.CharField(max_length=100, verbose_name="Identificador")
     ubicacion = models.CharField(max_length=100, verbose_name="Ubicacion")
 
@@ -39,12 +42,12 @@ class Alerta(models.Model):
 
 class Permiso(models.Model):
     id = models.AutoField(primary_key=True)
-    fecha_inicio = models.DateField(verbose_name="Fecha de inicio")
-    fecha_fin = models.DateField(verbose_name="Fecha de fin")
+    fecha_inicio = models.DateTimeField(verbose_name="Fecha de inicio")
+    fecha_fin = models.DateTimeField(verbose_name="Fecha de fin")
     objetos = models.CharField(max_length=100, verbose_name="Objetos")
     autorizacion = models.BooleanField(default=False)
     idVisitante_permi = models.ForeignKey(Visitante, on_delete=models.CASCADE, related_name="visitante_permiso", null=True)
-    idNiveles_seguridad = models.ForeignKey(Niveles_seguridad, on_delete=models.CASCADE) 
+    idNiveles_seguridad = models.ForeignKey(Niveles_seguridad, on_delete=models.CASCADE, null=True) 
 
 class Punto_control(models.Model):
     id = models.AutoField(primary_key=True)
@@ -66,3 +69,4 @@ class Punto_control_permiso(models.Model):
 class Punto_control_Dispositivos(models.Model):
     idPunto_control_dispo = models.ForeignKey(Punto_control, on_delete=models.CASCADE)
     idDispositivos = models.ForeignKey(Dispositivos, on_delete=models.CASCADE)
+

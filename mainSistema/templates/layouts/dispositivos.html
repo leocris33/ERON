@@ -2,12 +2,11 @@
 {% block content  %}
 
 <h1>Crear Dispositivo {{titulo}}</h1>
-
-{% comment %} <form action="{% url 'save' %}" method="POST"> {% endcomment %}
+ <form action="{% url 'saveD' %}" method="POST"> 
     {% csrf_token %}
     <div class="mb-3">
-      <label for="nombre_dis" class="form-label">Nombre del dispositivo</label>
-      <input type="text" class="form-control" name="nombre_dis">
+      <label for="nombre" class="form-label">Nombre del dispositivo</label>
+      <input type="text" class="form-control" name="nombre">
     </div>
     <div class="mb-3">
         <label for="direccion_ip" class="form-label">Direccion IP</label>
@@ -18,15 +17,13 @@
         <input type="text" class="form-control" name="direccion_mac">
       </div>
       <div class="mb-3">
-            <label for="ubicacion">Ubicacion</label>
-            <select class="form-control" id="ubicacion">
-              <option>Bloque 1</option>
-              <option>Bloque 2</option>
-              <option>Bloque 3</option>
-              <option>Bloque 4</option>
-              <option>Bloque 5</option>
-            </select>
-          </div>
+        <label for="identificador" class="form-label">Identidicador</label>
+        <input type="text" class="form-control" name="identificador">
+      </div>
+      <div class="mb-3">
+        <label for="ubicacion" class="form-label">Ubicacion</label>
+        <input type="text" class="form-control" name="ubicacion">
+      </div>
       
      
     <button type="sumbit" class="btn btn-primary">Guardar</button>

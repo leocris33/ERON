@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from ast import Num, Return
 from django.http import HttpResponse, JsonResponse
 from .forms import visitanteForm
-from mainSistema.models import Niveles_seguridad, Visitante
+from mainSistema.models import Dispositivos, Niveles_seguridad, Permiso, Visitante
 from urllib import response
 # Create your views here.
 
@@ -26,22 +26,26 @@ def puntos_de_control(request):
 def permiso(request):
     return render(request,"layouts/permiso.html")
 
+def reporte_permiso(request):
+    datosPermiso = Permiso.objects.all()
+    return render(request,"layouts/reporte_permiso.html",{
+        'mostrarPermiso' : datosPermiso
+    
+     })
+  
+    
 def reporte_visitante(request):
     datos = Visitante.objects.all()
     return render(request,"layouts/reporte_visitante.html",{
         'mostrarVisitante' : datos
 
     })
-
 def generar_QR(request):
     return render(request,"layouts/generarQR.html")
 
 def niveles_seguridad(request):
     return render(request,"layouts/niveles_seguridad.html")
         
-
-
-
 def crear_nivel_seguridad(request):
     return render(request, "layouts/crear_nivel_seguridad.html")
 
@@ -53,24 +57,24 @@ def administrar_niveles(request):
     })
 
 
-def pruebas_DB(request,nombre,apellidos,documento,fecha_nac,cargo,organizacion,permiso):
+# def pruebas_DB(request,nombre,apellidos,documento,fecha_nac,cargo,organizacion,permiso):
   
 
-    nuevo_visit = Visitante(
-        nombre = nombre,
-        apellido = apellidos,
-        documento = documento,
-        fechaNacimiento = fecha_nac,
-        cargo = cargo,
-        organizacion = organizacion,
-        permiso = permiso
+#     nuevo_visit = Visitante(
+#         nombre = nombre,
+#         apellido = apellidos,
+#         documento = documento,
+#         fechaNacimiento = fecha_nac,
+#         cargo = cargo,
+#         organizacion = organizacion,
+#         permiso = permiso
     
         
-    )
+#     )
 
-    nuevo_visit.save()
+#     nuevo_visit.save()
    
-    return HttpResponse(f"El visitante {nuevo_visit.nombre} ha sido guardado")
+#     return HttpResponse(f"El visitante {nuevo_visit.nombre} ha sido guardado")
 
 
 
@@ -86,7 +90,8 @@ def save_visitante(request):
         cargo = request.POST["cargo"]
         organizacion = request.POST["organizacion"]
         permiso = request.POST["permiso"]
-   
+        imagen = request.POST["imagen"]
+
 
 
         visit = Visitante(
@@ -97,7 +102,8 @@ def save_visitante(request):
             fechaNacimiento = fecha_nac,
             cargo = cargo,
             organizacion = organizacion,
-            permiso = permiso
+            permiso = permiso,
+            imagen = imagen
 
 
         )
@@ -131,57 +137,63 @@ def save_niveles_seguridad(request):
     else:
         return redirect("inicio")
 
-def get_visitante (request):
-    try:
-        visitante = Visitante.objects.all
-        response = f"el visitante solicitado es : {Visitante.nombre }{Visitante.apellido}"
-    except:
-        response = "el visitante no existe"
+def save_permiso(request):
 
-    return HttpResponse (Visitante)
-
-def get_Nivel_seguridad (request):
-    try:
-        niveles_seguridad = Niveles_seguridad.objects.all
-        response = f"el visitante solicitado es : {Niveles_seguridad.tipo_acceso }{Niveles_seguridad.descripcion}"
-    except:
-        response = "el visitante no existe"
-
-    return HttpResponse (Niveles_seguridad)
-    
-
-
-# def save_permiso(request):
-
-#     if request.method == 'POST':
-#         nombres = request.POST["nombres"]
-#         apellidos = request.POST["apellidos"]
-#         documento = request.POST["documento"]
-#         fecha_nac = request.POST["fecha_nac"]
-#         cargo = request.POST["cargo"]
-#         organizacion = request.POST["organizacion"]
-#         permiso = request.POST["permiso"]
+    if request.method == 'POST':
+        fecha_inicio = request.POST["fecha_inicio"]
+        fecha_fin = request.POST["fecha_fin"]
+        objetos = request.POST["objetos"]
+        autorizacion = request.POST["autorizacion"]
+        
    
 
 
-#         visit = Visitante(
+        permit = Permiso(
 
-#             nombre = nombres,
-#             apellido = apellidos,
-#             documento = documento,
-#             fechaNacimiento = fecha_nac,
-#             cargo = cargo,
-#             organizacion = organizacion,
-#             permiso = permiso
+            fecha_inicio = fecha_inicio,
+            fecha_fin = fecha_fin,
+            objetos = objetos,
+            autorizacion = autorizacion,
+           
 
 
-#         )
-#         visit.save()
+        )
+        permit.save()
 
-#         return redirect("visitante")
+        return redirect("permiso")
     
-#     else:
-#         return redirect("inicio"
+    else:
+        return redirect("inicio")
+
+def save_dispositivos(request):
+
+    if request.method == 'POST':
+        nombre = request.POST["nombre"]
+        direccion_ip = request.POST["direccion_ip"]
+        direccion_mac = request.POST["direccion_mac"]
+        identificador = request.POST["identificador"]
+        ubicacion = request.POST["ubicacion"]
+        
+   
+
+
+        dispo = Dispositivos(
+
+            nombre = nombre,
+            direccion_ip = direccion_ip,
+            direccion_mac = direccion_mac,
+            identificador = identificador,
+            ubicacion = ubicacion,
+           
+
+
+        )
+        dispo.save()
+
+        return redirect("dispositivos")
+    
+    else:
+        return redirect("inicio")
 
 def prueba(request):
     lista = []
@@ -204,7 +216,14 @@ def pruebas_orm(request):
 
     }, status=200)
 
+def editar(request,id):
+    visitante = Visitante.objects.get(id=id)
+    return render(request, 'layouts/editar.html')
 
+def eliminar(request):
+    visitante = Visitante.objects.get(id=id)
+    visitante.delete()
+    return render(request, 'layouts/eliminar.html')
 
 
 

@@ -4,9 +4,9 @@
 
 
 
-<h1>Reporte de niveles de seguridad</h1>
+<h1>Reporte de permisos</h1>
 
- <a name="" id="" class="btn btn-info" href="{% url 'crear_nivel_seguridad' %}" role="button">Agregar Nivel de seguridad</a><br>    
+ <a name="" id="" class="btn btn-primary" href="{% url 'permiso' %}" role="button">Agregar permiso</a><br>    
     
      <!-- <ul>
          <li></li>
@@ -24,23 +24,35 @@
          
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">TIPO DE ACCESO</th>
-            <th scope="col">DESCRIPCION</th>
+            <th scope="col">FECHA DE INGRESO</th>
+            <th scope="col">FECHA DE SALIDA</th>
+            <th scope="col">OBJETOS</th>
+            <th scope="col">AUTORIZACION</th>
             <th scope="col">ACCIONES</th>
+           
           
           </tr>
         </thead>
         <tbody>
-            {% for nivel in niveles_seguridad %}
+            {% for permit in mostrarPermiso %}
             <tr>
-                <th scope="row">{{nivel.id}}</th>
+                <th scope="row">{{permit.id}}</th>
+                <td>{{permit.fecha_inicio}}</td>
+                <td> {{permit.fecha_fin}}</td>
+                <td> {{permit.objetos}}</td>
                 <td>
-                    {{nivel.tipo_acceso}}</td>
-                <td>{{nivel.descripcion}}</td>
+                  {%if visit.autorizacion == 0%}
+                    No autoriza
+
+                    {%  else %}
+
+                    Autoriza
+                  {% endif%}
+                  </td>
                 <td>
                   <a name="" id="" class="btn btn-info" href="" role="button">editar</a>
 
-                  <a name="" id="" class="btn btn-danger" href="" role="button">Borrar</a>
+                  
                   
                 </td> 
 
