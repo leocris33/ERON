@@ -18,22 +18,41 @@ urlpatterns = [
     path('ingreso_listado/', mainSistema.views.listado_ingresos, name='listado_ingresos'),
 
     path('dispositivos/', mainSistema.views.dispositivos, name='dispositivos'),
+
     path('puntos_de_control/', mainSistema.views.puntos_de_control, name='puntos_de_control'),
+
     path('permiso/', views.permiso, name='permiso'),
+
     path('reporte_permiso/', views.reporte_permiso, name='reporte_permiso'),
+
     path('reporte_visitante/', views.reporte_visitante, name='reporte_visitante'),
+
     path('generar_QR/', views.generar_QR, name='generar_QR'),
+
     path('save/', views.save_visitante, name="save"),
+
     path('pruebas_orm/', views.pruebas_orm, name="pruebas_orm"),
+
     path('prueba/', mainSistema.views.prueba, name='prueba'),
+
     path('niveles_seguridad/', mainSistema.views.niveles_seguridad, name='niveles_seguridad'),
+
     path('crear_nivel_seguridad', views.crear_nivel_seguridad, name='crear_nivel_seguridad'),
+
     path('administrar_niveles', views.administrar_niveles, name='administrar_niveles'),
+
     path('saveNS/', views.save_niveles_seguridad, name="saveNS"),
+
     path('saveP/', views.save_permiso, name="saveP"),
+
     path('saveD/', views.save_dispositivos, name="saveD"),
+
     path('editar/', views.editar, name='editar'),
+
     path('visualizarVisitante',views.visualizarVisitante , name='visualizarVisitante'),
+
     path('inf_visitante', views.inf_visitante, name="inf_visitante"),
    
+
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

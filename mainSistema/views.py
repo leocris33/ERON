@@ -35,19 +35,13 @@ def dispositivos(request):
 def puntos_de_control(request):
     return render(request,"layouts/puntos_de_control.html")
 
-
-
-
-
-def permiso(request, documento):
-    asignarPermiso = Visitante.objects.get(documento = documento)
-    
-
+def permiso(request):
+    visi = Permiso.objects.all().values( 'id','idVisitante_permi__documento')
+    datosVisitante = Visitante.objects.all()
     return render(request,"layouts/permiso.html",{
-        'permiso' : asignarPermiso
+        'mostrarVisi' : datosVisitante,
+        'Visi' : visi
     })
-
-
 
 
 

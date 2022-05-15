@@ -15,10 +15,12 @@
 
     {% csrf_token %}
 
+    {% for vis in mostrarVisi%}
     <div class="mb-3">
-        <label  for="permiso" class="form-label">Nombre del visitante</label>
-        <input type="text" class="form-control" name="permiso">
+        <label for="idVisitante_permi__nombre" class="form-label">Nombre del visitante</label>
+        <td>{{ vis.nombre }}</td>
       </div>
+    {% endfor %}  
     <div class="mb-3">
         <label for="fecha_inicio" class="form-label">Fecha de ingreso</label>
         <input type="datetime-local" class="form-control" name="fecha_inicio">
