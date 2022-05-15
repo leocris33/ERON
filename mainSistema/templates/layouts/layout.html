@@ -62,15 +62,21 @@
                   <a class="dropdown-item" href="{% url 'crear_nivel_seguridad' %}">Crear nivel de seguridad</a>
                   <a class="dropdown-item" href="{% url 'administrar_niveles' %}">Administrar niveles de seguridad</a>
                   <div class="dropdown-divider"></div> 
-            <li class="nav-item">
-                <a style="text-decoration: none;" href="{% url 'dispositivos' %}">Dispositivos</a>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="{% url 'dispositivos' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Dispositivos
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'dispositivos' %}">Crear dispositivo</a>
+                  <a class="dropdown-item" href="{% url 'reporte_dispositivos' %}">Reporte dispositivos</a>
             </li> 
-            <li class="nav-item">
-                <a style="text-decoration: none;" href="{% url 'puntos_de_control' %}">Puntos De Control</a>
-            </li>
-            <li class="nav-item">
-                <a style="text-decoration: none;" href="{% url 'pruebas_orm' %}">Pruebas ORM</a>
-            </li>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="{% url 'puntos_de_control' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Puntos de control
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'puntos_de_control' %}">Crear punto de control</a>
+                  <a class="dropdown-item" href="{% url 'reporte_pts_control' %}">Reporte puntos de control</a>
             <li class="nav-item">
                 <a style="text-decoration: none;" href="{% url 'visualizarVisitante' %}">Visualizar visitante</a>
             </li>

@@ -25,13 +25,14 @@ urlpatterns = [
 
     path('reporte_permiso/', views.reporte_permiso, name='reporte_permiso'),
 
+    path('reporte_pts_control/', views.reporte_pts_control, name='reporte_pts_control'),
+
+
     path('reporte_visitante/', views.reporte_visitante, name='reporte_visitante'),
 
     path('generar_QR/', views.generar_QR, name='generar_QR'),
 
     path('save/', views.save_visitante, name="save"),
-
-    path('pruebas_orm/', views.pruebas_orm, name="pruebas_orm"),
 
     path('prueba/', mainSistema.views.prueba, name='prueba'),
 
@@ -47,11 +48,15 @@ urlpatterns = [
 
     path('saveD/', views.save_dispositivos, name="saveD"),
 
+    path('savePC/', views.save_puntos_de_control, name="savePC"),
+
     path('editar/', views.editar, name='editar'),
 
     path('visualizarVisitante',views.visualizarVisitante , name='visualizarVisitante'),
 
     path('inf_visitante', views.inf_visitante, name="inf_visitante"),
+
+    path('reporte_dispositivos/', views.reporte_dispositivos, name='reporte_dispositivos')
    
 
 

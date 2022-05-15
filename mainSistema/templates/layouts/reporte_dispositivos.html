@@ -1,0 +1,68 @@
+{% extends 'layouts/layout.html' %}
+
+{% block content  %}
+
+
+
+<h1>Reporte de dispositivos</h1>
+
+ <a name="" id="" class="btn btn-success" href="{% url 'dispositivos' %}" role="button">Agregar dispositivo</a><br>    
+    
+     <!-- <ul>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+     </ul> -->
+
+     
+      <br> 
+     <table id="tabla" class="table" >
+    
+        <thead>
+         
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">NOMBRE</th>
+            <th scope="col">DIRECCION IP</th>
+            <th scope="col">DIRECCION MAC</th>
+            <th scope="col">IDENTIFICADOR</th> 
+            <th scope="col">UBICACION</th>
+            <th scope="col">ACCIONES</th> 
+          
+          </tr>
+        </thead>
+        <tbody>
+            {% for dispo in mostrarDispositivos %}
+            <tr>
+                <th scope="row">{{dispo.id}}</th>
+                <td>{{dispo.nombre}}</td>
+                <td>{{dispo.direcion_ip}}</td>
+                <td>{{dispo.direcion_mac}}</td>
+                <td>{{dispo.identificador}}</td>
+                <td>{{dispo.ubicacion}}</td>
+                
+                <td>
+                  <a name="" id="" class="btn btn-info" href="{% url 'editar' %}" role="button">Editar</a>
+                  
+                  
+                </td> 
+
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      <h2></h2>
+
+      {%block extrajs%}
+      <script type="text/javascript">
+        $(document).ready( function () {
+          $('#tabla').DataTable();
+      } );
+    </script>
+
+      {%endblock extrajs%}
+
+
+{% endblock  %}

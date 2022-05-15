@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from ast import Num, Return
 from django.http import HttpResponse, JsonResponse
 from .forms import visitanteForm
-from mainSistema.models import Dispositivos, Niveles_seguridad, Permiso, Visitante, Ingreso, Punto_control_Dispositivos
+from mainSistema.models import Dispositivos, Niveles_seguridad, Permiso, Visitante, Ingreso, Punto_control_Dispositivos, Punto_control
 from urllib import response
 # Create your views here.
 
@@ -36,7 +36,7 @@ def puntos_de_control(request):
     return render(request,"layouts/puntos_de_control.html")
 
 def permiso(request):
-    visi = Permiso.objects.all().values( 'id','idVisitante_permi__documento')
+    visi = Permiso.objects.all().values( 'id','idVisitante_permi__nombre')
     datosVisitante = Visitante.objects.all()
     return render(request,"layouts/permiso.html",{
         'mostrarVisi' : datosVisitante,
@@ -66,7 +66,19 @@ def reporte_permiso(request):
 
 
 
+def reporte_pts_control(request):
+    datos = Punto_control.objects.all()
+    return render(request,"layouts/reporte_pts_control.html",{
+        'mostrarPunto' : datos
 
+    })
+
+def reporte_dispositivos(request):
+    datos = Dispositivos.objects.all()
+    return render(request,"layouts/reporte_dispositivos.html",{
+        'mostrarDispositivos' : datos
+
+    })
 
 
 
@@ -178,6 +190,31 @@ def save_visitante(request):
     else:
         return redirect("inicio")
 
+
+def save_puntos_de_control(request):
+
+    if request.method == 'POST':
+        nombre = request.POST["nombre"]
+        descripcion = request.POST["descripcion"]
+        
+
+
+        punto = Punto_control(
+
+            nombre = nombre,
+            descripcion = descripcion,
+          
+
+
+        )
+        punto.save()
+
+        return redirect("puntos_de_control")
+    
+    else:
+        return redirect("inicio")
+
+
 def save_niveles_seguridad(request):
 
     if request.method == 'POST':
@@ -270,15 +307,6 @@ def prueba(request):
 
     })
 
-def pruebas_orm(request):
-
-    visitas = Visitante.objects.all().values('nombre', 'apellido', 'documento')
-
-    return JsonResponse({
-        'visitantes' : list(visitas)
-
-
-    }, status=200)
 
 
 def get_Visitante (request, documento):

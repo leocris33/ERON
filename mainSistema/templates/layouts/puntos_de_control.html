@@ -1,8 +1,27 @@
 {% extends 'layouts/layout.html' %}
+
 {% block content  %}
 
-<h2> {{'esto es puntos de control'|upper}} </h2>
+<h1>Crear punto de control </h1>
 
+
+<form action="{% url 'savePC' %}" method="POST">
+  {% csrf_token %}
+  
+
+
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input type="text" class="form-control" name="nombre">
+    </div>
+    <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripcion</label>
+        <input type="text" class="form-control" name="descripcion">
+      </div>
+      
+
+      <button type="sumbit" class="btn btn-primary">Guardar</button>
+  </form>
 
 
 {% endblock  %}
