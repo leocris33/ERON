@@ -12,7 +12,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.inicio, name='inicio'),
     path('visitante/', mainSistema.views.visitante, name='visitante'),
-    path('ingreso/', mainSistema.views.ingreso, name='ingreso'),
+    path('ingreso_listado/', mainSistema.views.listado_ingresos, name='listado_ingresos'),
     path('dispositivos/', mainSistema.views.dispositivos, name='dispositivos'),
     path('puntos_de_control/', mainSistema.views.puntos_de_control, name='puntos_de_control'),
     path('permiso/', views.permiso, name='permiso'),
