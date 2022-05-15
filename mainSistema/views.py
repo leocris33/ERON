@@ -20,6 +20,17 @@ def visualizarVisitante(request):
     'mostrarvist' : datovisit
 })
 
+def editarVisitante(request, id):
+    visitante = Visitante.objects.get(id=id)
+    modelo = visitanteForm(request.POST or  None, request.Files or None ,instance=visitante)
+    if modelo.is_valid() and request.POST:
+        modelo.save()
+        return redirect("visitante")
+    return render(request, "layouts/editar_visitante.html", {
+        'editarvisitante' : visitante
+    })
+
+
 def inf_visitante(request):
     return render(request,"layouts/inf_visitante.html")
 

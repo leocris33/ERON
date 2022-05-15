@@ -30,6 +30,7 @@ urlpatterns = [
     path('saveD/', views.save_dispositivos, name="saveD"),
     path('editar/', views.editar, name='editar'),
     path('visualizarVisitante',views.visualizarVisitante , name='visualizarVisitante'),
-    path('inf_visitante', views.inf_visitante, name="inf_visitante")
+    path('inf_visitante', views.inf_visitante, name="inf_visitante"),
+    path('editarVisitante', views.editarVisitante, name="editarVisitante")
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
