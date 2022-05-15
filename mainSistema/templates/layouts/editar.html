@@ -2,56 +2,7 @@
 
 {% block content  %}
 
-<h1>Crear Visitante </h1>
 
-
-<form action="{% url 'save' %}" method="POST">
-  {% csrf_token %}
-  
-
-
-    <div class="mb-3">
-      <label for="nombres" class="form-label">Nombres</label>
-      <input type="text" class="form-control" name="nombres">
-    </div>
-    <div class="mb-3">
-        <label for="apellidos" class="form-label">Apellidos</label>
-        <input type="text" class="form-control" name="apellidos">
-      </div>
-      <div class="mb-3">
-        <label for="documento" class="form-label">Documento</label>
-        <input type="text" class="form-control" name="documento">
-      </div>
-      <div class="mb-3">
-        <label for="permiso" class="form-label">Permiso</label>
-          <select name= "permiso" class="form-control" id="permiso">
-            <option value=0 selected>No autoriza</option>
-            <option value=1>Autoriza</option>
-
-          </select>
-      </div>
-      <div class="mb-3">
-        <label for="fecha_nac" class="form-label">Fecha De Nacimiento</label>
-        <input type="date" class="form-control" name="fecha_nac">
-      </div>
-      <div class="mb-3">
-        <label for="cargo" class="form-label">Cargo</label>
-        <input type="cargo" class="form-control" name="cargo">
-      </div>
-      <div class="mb-3">
-        <label for="organizacion" class="form-label">Organizacion</label>
-        <input type="text" class="form-control" name="organizacion">
-      </div>
-      <div class="mb-3">
-        <label for="imagen" class="form-label">Foto</label>
-        <input type="file" class="form-control" name="imagen">
-      </div>
-      
-
-
-
-      <button type="sumbit" class="btn btn-primary">Guardar</button>
-  </form>
 
 
 {% endblock  %}

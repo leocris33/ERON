@@ -100,3 +100,10 @@ class Punto_control_Dispositivos(models.Model):
     def __str__(self) -> str:
         return f"{self.idPunto_control_dispo} --> {self.idDispositivos}"
 
+class Alerta(models.Model):
+    id = models.AutoField(primary_key=True)
+    fecha = models.DateTimeField(verbose_name="Fecha")
+    observaciones = models.CharField(max_length=200, verbose_name="observaciones", null=True)
+    dispositivos_idDispositivos = models.ForeignKey(Dispositivos, on_delete=models.CASCADE, null=True)
+
+
