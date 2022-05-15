@@ -20,15 +20,7 @@ def visualizarVisitante(request):
     'mostrarvist' : datovisit
 })
 
-def editarVisitante(request, id):
-    visitante = Visitante.objects.get(id=id)
-    modelo = visitanteForm(request.POST or  None, request.Files or None ,instance=visitante)
-    if modelo.is_valid() and request.POST:
-        modelo.save()
-        return redirect("visitante")
-    return render(request, "layouts/editar_visitante.html", {
-        'editarvisitante' : visitante
-    })
+
 
 
 def inf_visitante(request):
@@ -43,8 +35,19 @@ def dispositivos(request):
 def puntos_de_control(request):
     return render(request,"layouts/puntos_de_control.html")
 
-def permiso(request):
-    return render(request,"layouts/permiso.html")
+
+
+
+
+def permiso(request, documento):
+    asignarPermiso = Visitante.objects.get(documento = documento)
+    
+
+    return render(request,"layouts/permiso.html",{
+        'permiso' : asignarPermiso
+    })
+
+
 
 
 
