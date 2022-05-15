@@ -21,7 +21,7 @@ urlpatterns = [
 
     path('puntos_de_control/', mainSistema.views.puntos_de_control, name='puntos_de_control'),
 
-    path('permiso/', views.permiso, name='permiso'),
+    path('permiso/<int:id>', views.permiso, name='permiso'),
 
     path('reporte_permiso/', views.reporte_permiso, name='reporte_permiso'),
 

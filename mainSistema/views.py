@@ -35,12 +35,11 @@ def dispositivos(request):
 def puntos_de_control(request):
     return render(request,"layouts/puntos_de_control.html")
 
-def permiso(request):
-    visi = Permiso.objects.all().values( 'id','idVisitante_permi__documento')
-    datosVisitante = Visitante.objects.all()
+def permiso(request, id):
+    datosVisitante = Visitante.objects.get(id = id)
     return render(request,"layouts/permiso.html",{
-        'mostrarVisi' : datosVisitante,
-        'Visi' : visi
+        'mostrarVisi' :datosVisitante
+        
     })
 
 
@@ -224,7 +223,7 @@ def save_permiso(request):
         )
         permit.save()
 
-        return redirect("permiso")
+        return redirect("reporte_permiso")
     
     else:
         return redirect("inicio")
