@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from ast import Num, Return
 from django.http import HttpResponse, JsonResponse
 from .forms import visitanteForm
-from mainSistema.models import Dispositivos, Niveles_seguridad, Permiso, Visitante, Ingreso, Punto_control_Dispositivos
+from mainSistema.models import Dispositivos, Niveles_seguridad, Permiso, Punto_control, Visitante, Ingreso, Punto_control_Dispositivos
 from urllib import response
 # Create your views here.
 
@@ -51,12 +51,14 @@ def permiso(request, id):
 def reporte_permiso(request):
     datosPermiso = Permiso.objects.all().values('id','idVisitante_permi__documento', 'fecha_inicio', 'fecha_fin', 'objetos', 'autorizacion' )
     visi = Visitante.objects.all()
+    datoid = Niveles_seguridad.objects.all()
 
 
     
     return render(request,"layouts/reporte_permiso.html",{ 
         'documentoVisi'  : visi,    
-        'mostrarPermiso' : datosPermiso
+        'mostrarPermiso' : datosPermiso,
+        'mostrarID'      : datoid 
      })
 
     # return JsonResponse({
@@ -64,6 +66,19 @@ def reporte_permiso(request):
     # }, status=200)
 
 
+def reporte_puntos_de_control(request):
+    datos = Punto_control.objects.all()
+    return render(request,"layouts/reporte_puntos_de_control.html",{
+        'mostrarPunto' : datos
+
+    })
+
+def reporte_dispositivos(request):
+    datos = Dispositivos.objects.all()
+    return render(request,"layouts/reporte_dispositivos.html",{
+        'mostrarDis' : datos
+
+    })
 
 
 
@@ -177,11 +192,36 @@ def save_visitante(request):
     else:
         return redirect("inicio")
 
+def save_puntos_de_control(request):
+
+    if request.method == 'POST':
+        nombre = request.POST["nombre"]
+        descripcion = request.POST["descripcion"]
+        
+
+
+        punto = Punto_control(
+
+            nombre = nombre,
+            descripcion = descripcion,
+          
+
+
+        )
+        punto.save()
+
+        return redirect("puntos_de_control")
+    
+    else:
+        return redirect("inicio")
+
+
 def save_niveles_seguridad(request):
 
     if request.method == 'POST':
         tipo_acceso = request.POST["tipo_acceso"]
         descripcion = request.POST["descripcion"]
+        
         
 
 
@@ -189,6 +229,7 @@ def save_niveles_seguridad(request):
 
             tipo_acceso = tipo_acceso,
             descripcion = descripcion,
+            
           
 
 
@@ -207,6 +248,7 @@ def save_permiso(request):
         fecha_fin = request.POST["fecha_fin"]
         objetos = request.POST["objetos"]
         autorizacion = request.POST["autorizacion"]
+      
         
    
 
@@ -217,6 +259,8 @@ def save_permiso(request):
             fecha_fin = fecha_fin,
             objetos = objetos,
             autorizacion = autorizacion,
+            
+
            
 
 
@@ -269,15 +313,6 @@ def prueba(request):
 
     })
 
-def pruebas_orm(request):
-
-    visitas = Visitante.objects.all().values('nombre', 'apellido', 'documento')
-
-    return JsonResponse({
-        'visitantes' : list(visitas)
-
-
-    }, status=200)
 
 
 def get_Visitante (request, documento):

@@ -30,6 +30,7 @@ class Niveles_seguridad(models.Model):
     id = models.AutoField(primary_key=True)
     tipo_acceso = models.CharField(max_length=100, verbose_name="Tipo de acceso")
     descripcion = models.CharField(max_length=200, verbose_name="Descripcion", null=True)
+    idVisitante_nivel = models.ForeignKey(Visitante, on_delete=models.CASCADE, related_name="idVisitante_nivel", null=True)
 
 
 class Dispositivos(models.Model):

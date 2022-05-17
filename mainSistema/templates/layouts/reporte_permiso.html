@@ -6,7 +6,7 @@
 
 <h1>Reporte de permisos</h1>
 
- <a name="" id="" class="btn btn-primary" href="" role="button">Agregar permiso</a><br>    
+  
     
    
 
@@ -23,6 +23,8 @@
             <th scope="col">FECHA DE SALIDA</th>
             <th scope="col">OBJETOS</th>
             <th scope="col">AUTORIZACION</th>
+            <th scope="col">ID NIVEL DE SEGURIDAD</th>
+            <th scope="col">ID VISITANTE</th>
             <th scope="col">ACCIONES</th>
            
           
@@ -31,7 +33,11 @@
         <tbody>
             {% for permit in mostrarPermiso %}
             {% for visi in documentoVisi %}
-            {% if visi.documento == permit.idVisitante_permi__documento %}
+            
+
+            
+            {% if visi.documento == permit.idVisitante_permi__documento  %} 
+
             
             <tr>
                 <th scope="row">{{permit.id}}</th>
@@ -51,6 +57,8 @@
                     Autoriza
                   {% endif%}
                   </td>
+                <td>{{nivel.id}}</td>
+                <td> {{visi.id}}</td>
                 <td>
                   <a name="" id="" class="btn btn-info" href="" role="button">editar</a>
 
@@ -61,6 +69,7 @@
               </tr>
               {% endif %}
             {% endfor %}
+            
             {% endfor %}
         </tbody>
       </table>

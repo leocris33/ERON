@@ -25,8 +25,7 @@ urlpatterns = [
 
     path('reporte_permiso/', views.reporte_permiso, name='reporte_permiso'),
 
-    path('reporte_pts_control/', views.reporte_pts_control, name='reporte_pts_control'),
-
+    path('reporte_pts_control/', views.reporte_puntos_de_control, name='reporte_pts_control'),
 
     path('reporte_visitante/', views.reporte_visitante, name='reporte_visitante'),
 
