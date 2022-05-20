@@ -1,9 +1,15 @@
+from datetime import datetime, timezone
 from django.shortcuts import redirect, render
 from ast import Num, Return
 from django.http import HttpResponse, JsonResponse
 from .forms import visitanteForm
-from mainSistema.models import Dispositivos, Niveles_seguridad, Permiso, Punto_control, Visitante, Ingreso, Punto_control_Dispositivos
+from mainSistema.models import Alerta, Dispositivos, Niveles_seguridad, Permiso, Punto_control, Visitante, Ingreso, Punto_control_Dispositivos
 from urllib import response
+from django.shortcuts import render
+import qrcode
+import qrcode.image.svg
+from io import BytesIO
+
 # Create your views here.
 
 
@@ -37,8 +43,10 @@ def puntos_de_control(request):
 
 def permiso(request, id):
     datosVisitante = Visitante.objects.get(id = id)
+    niveles_seg = Niveles_seguridad.objects.all()
     return render(request,"layouts/permiso.html",{
-        'mostrarVisi' :datosVisitante
+        'mostrarVisi'   : datosVisitante,
+        'niveles'       : niveles_seg
         
     })
 
@@ -244,11 +252,16 @@ def save_niveles_seguridad(request):
 def save_permiso(request):
 
     if request.method == 'POST':
+        
+        pk = request.POST["pk"]
         fecha_inicio = request.POST["fecha_inicio"]
         fecha_fin = request.POST["fecha_fin"]
         objetos = request.POST["objetos"]
+        nivel_seg = request.POST["nivel_seg"]
         autorizacion = request.POST["autorizacion"]
-      
+
+        visit = Visitante.objects.get(pk = int(pk))
+        nivel_s = Niveles_seguridad.objects.get(pk = int(nivel_seg))
         
    
 
@@ -259,18 +272,22 @@ def save_permiso(request):
             fecha_fin = fecha_fin,
             objetos = objetos,
             autorizacion = autorizacion,
-            
-
-           
-
-
+            idVisitante_permi = visit,
+            idNiveles_seguridad = nivel_s
         )
+        
         permit.save()
 
         return redirect("reporte_permiso")
+
+        
     
     else:
-        return redirect("inicio")
+        #return redirect("inicio")
+        return JsonResponse({
+            'error' : 'algo está mal'
+
+        }, status=400)
 
 def save_dispositivos(request):
 
@@ -333,6 +350,36 @@ def eliminar(request):
     visitante = Visitante.objects.get(id=id)
     visitante.delete()
     return render(request, 'layouts/eliminar.html')
+
+def alertas(request,id,obs):    
+    Alert = Alerta(
+     dispositivos_idDispositivos_id = id,
+     fecha = datetime.now(),
+     observaciones = obs,
+    )
+    Alert.save()
+    return redirect("inicio")
+    #id = Dispositivos.objects.get(id=id).values()
+    #observaciones= Alerta.objects.get(obs=obs).values()
+    # return render(request,"layouts/alertas.html",{
+    #     'alertas': datos
+
+    # })
+    
+    # return JsonResponse({
+    #     'datos' : list(info),
+    # }, status=200)
+
+def qr(request):
+    context = {}
+    if request.method == "POST":
+        factory = qrcode.image.svg.SvgImage
+        img = qrcode.make(request.POST.get("qr_text",""), image_factory=factory, box_size=20)
+        stream = BytesIO()
+        img.save(stream)
+        context["svg"] = stream.getvalue().decode()
+
+    return render(request, "generarQR.html", context=context)
 
 
 

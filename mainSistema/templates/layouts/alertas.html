@@ -1,0 +1,26 @@
+{% extends 'layouts/layout.html' %}
+
+{% block content  %}
+<h1>Registros Alertas</h1>
+    
+     
+        {% comment %} <table id='tabla' class="table table-striped">
+        <thead> 
+          <tr>
+            <th scope="col">Fecha y hora</th>
+            <th scope="col">ID DISPOSITIVO</th>
+            <th scope="col">OBSERVACIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for estud in estudiantes %}
+            <tr>
+                <th scope="row">{{estud.id}}</th>
+                <td>{{estud.nombres}}</td>
+                <td> {{estud.apellidos}}</td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table> {% endcomment %}
+
+{% endblock  %}

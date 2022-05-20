@@ -29,8 +29,6 @@ urlpatterns = [
 
     path('reporte_visitante/', views.reporte_visitante, name='reporte_visitante'),
 
-    path('generar_QR/', views.generar_QR, name='generar_QR'),
-
     path('save/', views.save_visitante, name="save"),
 
     path('prueba/', mainSistema.views.prueba, name='prueba'),
@@ -55,7 +53,13 @@ urlpatterns = [
 
     path('inf_visitante', views.inf_visitante, name="inf_visitante"),
 
-    path('reporte_dispositivos/', views.reporte_dispositivos, name='reporte_dispositivos')
+    path('reporte_dispositivos/', views.reporte_dispositivos, name='reporte_dispositivos'),
+
+    path('alertas/', views.alertas, name='alertas'),
+
+    path('alertas/<str:id>/<str:obs>',views.alertas),
+
+    path('generarQR/', views.qr, name='generarQR'),
    
 
 

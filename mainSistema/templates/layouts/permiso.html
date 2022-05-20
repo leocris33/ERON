@@ -20,7 +20,10 @@
     <div class="mb-3">
         <label for="idVisitante_permi__nombre" class="form-label">Nombre de visitante</label>
         <a>{{ mostrarVisi.nombre }}</a>
+        <h3>{{mostrarVisi.pk}}</h3>
       </div>
+
+      <input id="prodId" name="pk" type="hidden" value="{{mostrarVisi.pk}}">
     <div class="mb-3">
         <label for="fecha_inicio" class="form-label">Fecha de ingreso</label>
         <input type="datetime-local" class="form-control" name="fecha_inicio">
@@ -33,6 +36,18 @@
       <div class="mb-3">
         <label for="objetos" class="form-label">Objetos</label>
         <input type="text" class="form-control" name="objetos">
+      </div>
+      <div class="mb-3">
+        <label for="nivel_seg" class="form-label">Nivel de seguridad</label>
+          <select name= "nivel_seg" class="form-control" id="nivel_seg">
+            {% for nivel in niveles %}
+
+              <option value={{nivel.pk}} selected>{{nivel.tipo_acceso}}</option>
+            
+            {% endfor %}
+            
+
+          </select>
       </div>
       <div class="mb-3">
         <label for="autorizacion" class="form-label">Autorizacion</label>

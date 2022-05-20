@@ -50,7 +50,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="{% url 'reporte_permiso'%} ">Reporte permisos</a>
-                  <a class="dropdown-item" href="{% url 'generar_QR'%} ">Generar codigo QR</a>
+                  <a class="dropdown-item" href="{% url 'generarQR'%} ">Generar codigo QR</a>
                   <div class="dropdown-divider">
 
                 </div>
@@ -77,13 +77,11 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="{% url 'puntos_de_control' %}">Crear punto de control</a>
                   <a class="dropdown-item" href="{% url 'reporte_pts_control' %}">Reporte puntos de control</a>
-            <li class="nav-item">
-                <a style="text-decoration: none;" href="{% url 'visualizarVisitante' %}">Visualizar visitante</a>
-            </li>
+            
             <li class="nav-item">
                 <a style="text-decoration: none;" href="{% url 'listado_ingresos' %}">Reporte ingresos</a>
             </li>
-                
+           
 
         </ul>
  </nav>    

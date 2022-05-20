@@ -7,14 +7,6 @@
 <h1>Reporte de visitantes</h1>
 
  <a name="" id="" class="btn btn-success" href="{% url 'visitante' %}" role="button">Agregar Visitante</a><br>    
-    
-     <!-- <ul>
-         <li></li>
-         <li></li>
-         <li></li>
-         <li></li>
-         <li></li>
-     </ul> -->
 
      
       <br> 
@@ -28,7 +20,6 @@
             <th scope="col">APELLIDOS</th>
             <th scope="col">DOCUMENTO</th>
             <th scope="col">PERMISO</th> 
-            <th scope="col">FOTO</th>
             <th scope="col">ACCIONES</th> 
           
           </tr>
@@ -39,7 +30,7 @@
                 <th scope="row">{{visit.id}}</th>
                 <td>{{visit.nombre}}</td>
                 <td>{{visit.apellido}}</td>
-                <td>{{visit.documento}}</td>
+                <td><a class="btn btn-outline-secondary" href="">{{visit.documento}}</a></td>
                 <td>
                   {%if visit.permiso == 0%}
                     No autoriza
@@ -48,10 +39,6 @@
 
                     Autoriza
                   {% endif%}
-                  </td>
-                  <td>
-                    <img src="{{visit.imagen}}"  height="100">
-                    
                   </td>
                 <td>
                   <a name="" id="" class="btn btn-info" href="{% url 'permiso' visit.id %}" role="button">Asignar permiso</a>
