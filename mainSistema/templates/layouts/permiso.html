@@ -15,15 +15,21 @@
 
     {% csrf_token %}
 
-    
-   
-    <div class="mb-3">
-        <label for="idVisitante_permi__nombre" class="form-label">Nombre de visitante</label>
-        <a>{{ mostrarVisi.nombre }}</a>
-        <h3>{{mostrarVisi.pk}}</h3>
+    <br>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Datos del visitante</h5>
+        <h6 class="card-subtitle mb-2 text-muted">ID: {{mostrarVisi.pk}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">NOMBRE: {{ mostrarVisi.nombre }}</h6>
+
+        <p class="card-text">Este visitante ya se encuentra registrado</p>
+        
       </div>
+    </div>
+    
 
       <input id="prodId" name="pk" type="hidden" value="{{mostrarVisi.pk}}">
+      <br>
     <div class="mb-3">
         <label for="fecha_inicio" class="form-label">Fecha de ingreso</label>
         <input type="datetime-local" class="form-control" name="fecha_inicio">

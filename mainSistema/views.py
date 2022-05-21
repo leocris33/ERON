@@ -59,14 +59,16 @@ def permiso(request, id):
 def reporte_permiso(request):
     datosPermiso = Permiso.objects.all().values('id','idVisitante_permi__documento', 'fecha_inicio', 'fecha_fin', 'objetos', 'autorizacion' )
     visi = Visitante.objects.all()
-    datoid = Niveles_seguridad.objects.all()
+    niveles_seg= Niveles_seguridad.objects.all()
 
 
     
     return render(request,"layouts/reporte_permiso.html",{ 
         'documentoVisi'  : visi,    
         'mostrarPermiso' : datosPermiso,
-        'mostrarID'      : datoid 
+        'niveles'        : niveles_seg   
+         
+            
      })
 
     # return JsonResponse({

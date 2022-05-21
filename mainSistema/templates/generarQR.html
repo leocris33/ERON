@@ -8,14 +8,15 @@
         crossorigin="anonymous">
 </head>
 <body>
+  <a name="" id="" class="btn btn-secondary" href="{% url 'inicio' %}" role="button">Volver</a>
   <div class="container shadow"
        style="width: 800px; margin-top: 5em; padding: 2em">
     <form method="post">
       {% csrf_token %}
-      <h3>Enter any text to generate a QR code</h3>
+      <h3>Digita el documento de identidad</h3><br>
       <div class="input-group mb-3">
         <span class="input-group-text"
-              id="inputGroup-sizing-default">QR Code Text:</span>
+              id="inputGroup-sizing-default">ERON QR:</span>
         <input type="text"
                class="form-control"
                aria-describedby="inputGroup-sizing-default"

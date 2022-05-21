@@ -44,16 +44,9 @@
                  
                 </div>
             </li> 
-            <li class="nav-item dropdown">
-                <a class="dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Permisos
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{% url 'reporte_permiso'%} ">Reporte permisos</a>
-                  <a class="dropdown-item" href="{% url 'generarQR'%} ">Generar codigo QR</a>
-                  <div class="dropdown-divider">
-
-                </div>
+            <li class="nav-item">
+              <a style="text-decoration: none;" href="{% url 'reporte_permiso' %}">Reporte Permisos</a>
+          </li>
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="{% url 'niveles_seguridad' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Niveles de seguridad
